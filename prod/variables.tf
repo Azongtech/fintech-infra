@@ -85,19 +85,19 @@ variable "key_name" {
 variable "domain_name" {
   description = "Primary domain name for certificate issuance"
   type        = string
-  default     = "azongtech.org"
+  default     = "azongtech"
 }
 
 variable "san_domains" {
   description = "SANs (Subject Alternative Names) for SSL certificate"
   type        = list(string)
-  default     = ["azongtech.org"]
+  default     = ["azongtech"]
 }
 
 variable "route53_zone_id" {
   description = "Route 53 hosted zone ID for domain validation"
   type        = string
-  default     = "Z04206282XXO0JKCL1N69"
+  default     = "Z045177830HYQXQSNTMQE"
 }
 
 ################################################################################
