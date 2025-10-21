@@ -118,6 +118,23 @@ resource "aws_acm_certificate_validation" "cert" {
   validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }
 
+variable "domain_name" {
+  description = "Primary domain name for the ACM certificate"
+  type        = string
+  default     = "azongtech.org" # or your actual domain
+}
+
+variable "san_domains" {
+  description = "List of Subject Alternative Names (SANs) for the certificate"
+  type        = list(string)
+  default     = []["www.azongtech.org"]
+}
+
+variable "route53_zone_id" {
+  description = "The ID of the Route53 hosted zone for the domain"
+  type        = string
+  default     = "Z04206282XXO0JKCL1N69"
+}
 
 
 
