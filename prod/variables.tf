@@ -82,23 +82,44 @@ variable "key_name" {
 # Certificate Manager (ACM) & Route 53
 ################################################################################
 
-variable "domain_name" {
-  description = "Primary domain name for certificate issuance"
-  type        = string
-  default     = "azongtech.org"
+# -------------------------------------------
+# ACM Certificate
+# -------------------------------------------
+resource "aws_acm_certificate" "azongtech_cert" {
+  domain_name               = "azongtech.org"
+  validation_method         = "DNS"
+  subject_alternative_names = ["*.azongtech.org"] # optional wildcard
+
+  tags = {
+    Environment = "prod"
+  }
 }
 
-variable "san_domains" {
-  description = "SANs (Subject Alternative Names) for SSL certificate"
-  type        = list(string)
-  default     = ["azongtech.org"]
+# -------------------------------------------
+# DNS Validation Records in Route 53
+# -------------------------------------------
+resource "aws_route53_record" "cert_validation" {
+  for_each = {
+    for dvo in aws_acm_certificate.azongtech_cert.domain_validation_options : dvo.domain_name => dvo
+  }
+
+  zone_id = "Z04206282XXO0JKCL1N69" # Replace with your actual hosted zone ID
+  name    = each.value.resource_record_name
+  type    = each.value.resource_record_type
+  ttl     = 300
+  records = [each.value.resource_record_value]
 }
 
-variable "route53_zone_id" {
-  description = "Route 53 hosted zone ID for domain validation"
-  type        = string
-  default     = "Z045177830HYQXQSNTMQE"
+# -------------------------------------------
+# Validate the ACM Certificate
+# -------------------------------------------
+resource "aws_acm_certificate_validation" "cert" {
+  certificate_arn         = aws_acm_certificate.azongtech_cert.arn
+  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
 }
+
+
+
 
 ################################################################################
 # ECR Repositories
