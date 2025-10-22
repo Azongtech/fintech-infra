@@ -9,7 +9,7 @@ data "aws_caller_identity" "current" {}
 data "aws_ami" "ubuntu_latest" {
   count       = var.ami_id == "" ? 1 : 0
   most_recent = true
-  owners      = ["099720109477"]  # Canonical's Ubuntu Owner ID
+  owners      = ["148761670084"]  # Canonical's Ubuntu Owner ID
 
   filter {
     name   = "name"

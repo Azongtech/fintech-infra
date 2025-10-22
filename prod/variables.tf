@@ -86,9 +86,9 @@ variable "key_name" {
 # ACM Certificate
 # -------------------------------------------
 resource "aws_acm_certificate" "azongtech_cert" {
-  domain_name               = "azongtech.org"
+  domain_name               = "azongtech.click"
   validation_method         = "DNS"
-  subject_alternative_names = ["*.azongtech.org"] # optional wildcard
+  subject_alternative_names = ["*.azongtech.click"] # optional wildcard
 
   tags = {
     Environment = "prod"
@@ -103,7 +103,7 @@ resource "aws_route53_record" "cert_validation" {
     for dvo in aws_acm_certificate.azongtech_cert.domain_validation_options : dvo.domain_name => dvo
   }
 
-  zone_id = "Z09989351RBJT7ORQE7XL" # Replace with your actual hosted zone ID
+  zone_id = "ZZ045177830HYQXQSNTMQE" # Replace with your actual hosted zone ID
   name    = each.value.resource_record_name
   type    = each.value.resource_record_type
   ttl     = 300
@@ -121,19 +121,19 @@ resource "aws_acm_certificate_validation" "cert" {
 variable "domain_name" {
   description = "Primary domain name for the ACM certificate"
   type        = string
-  default     = "azongtech.org" # or your actual domain
+  default     = "azongtech.click" # or your actual domain
 }
 
 variable "san_domains" {
   description = "List of Subject Alternative Names (SANs) for the certificate"
   type        = list(string)
-  default     = ["www.azongtech.org"]
+  default     = ["www.azongtech.click"]
 }
 
 variable "route53_zone_id" {
   description = "The ID of the Route53 hosted zone for the domain"
   type        = string
-  default     = "Z09989351RBJT7ORQE7XL"
+  default     = "ZZ045177830HYQXQSNTMQE"
 }
 
 

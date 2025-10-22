@@ -2,19 +2,19 @@
 variable "domain_name" {
   description = "Primary domain name for the certificate"
   type        = string
-  default     = "azongtech.org"
+  default     = "azongtech.click"
 }
 
 variable "san_domains" {
   description = "Subject alternative names for the certificate"
   type        = list(string)
-  default     = ["*.azongtech.org"]
+  default     = ["*.azongtech.click"]
 }
 
 variable "route53_zone_id" {
   description = "Route 53 Hosted Zone ID"
   type        = string
-  default     = "Z09989351RBJT7ORQE7XL" # Replace with actual Route 53 Zone ID
+  default     = "ZZ045177830HYQXQSNTMQE" # Replace with actual Route 53 Zone ID
 }
 
 variable "tags" {
