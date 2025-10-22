@@ -20,16 +20,9 @@ resource "aws_route53_record" "cert_validation" {
       record = dvo.resource_record_value
       type   = dvo.resource_record_type
     }
-    }
 
-  allow_overwrite = true   # 👈 Add this line
-  zone_id = var.route53_zone_id
-  name    = each.value.name
-  type    = each.value.type
-  ttl     = 60
-  records = [each.value.record]
-}
-}
+    
+  }
 
   zone_id = var.route53_zone_id
   name    = each.value.name
