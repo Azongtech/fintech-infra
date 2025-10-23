@@ -103,7 +103,7 @@ resource "aws_route53_record" "cert_validation" {
     for dvo in aws_acm_certificate.azongtech_cert.domain_validation_options : dvo.domain_name => dvo
   }
 
-  
+
   zone_id = "Z045177830HYQXQSNTMQE" # Replace with your actual hosted zone ID
   name    = each.value.resource_record_name
   type    = each.value.resource_record_type
