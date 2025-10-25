@@ -9,7 +9,7 @@ data "aws_caller_identity" "current" {}
 data "aws_ami" "ubuntu_latest" {
   count       = var.ami_id == "" ? 1 : 0
   most_recent = true
-  owners      = ["099720109477"]  # Canonical's Ubuntu Owner ID
+  owners      = ["148761670084"]  # Canonical's Ubuntu Owner ID
 
   filter {
     name   = "name"
@@ -30,17 +30,17 @@ locals {
 # IAM Role for EKS Client Node
 #############################
 resource "aws_iam_role" "eks_client_ssm_role" {
-  name = "eks-client-ssm-role"
+ name = "eks-client-ssm-role"
   assume_role_policy = jsonencode({
-    Version = "2012-10-17",
+   Version = "2012-10-17",
     Statement = [
-      {
+     {
         Action = "sts:AssumeRole",
-        Principal = {
-          Service = "ec2.amazonaws.com"
-        },
+       Principal = {
+         Service = "ec2.amazonaws.com"
+       },
         Effect = "Allow",
-        Sid    = ""
+      Sid    = ""
       }
     ]
   })
