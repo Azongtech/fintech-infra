@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_acm_certificate" "azongtech_cert" {
-  domain_name       = var.domain_name
+  domain_name               = var.domain_name
   subject_alternative_names = var.san_domains
   validation_method         = "DNS"
   tags                      = var.tags
@@ -21,7 +21,7 @@ resource "aws_route53_record" "cert_validation" {
       type   = dvo.resource_record_type
     }
 
-    
+
   }
 
   zone_id = var.route53_zone_id
