@@ -128,7 +128,7 @@ variable "domain_name" {
 variable "san_domains" {
   description = "List of Subject Alternative Names (SANs) for the certificate"
   type        = list(string)
-  default     = ["www.azongtech.click"]
+  default     = ["*.azongtech.click"]
 }
 
 variable "route53_zone_id" {
