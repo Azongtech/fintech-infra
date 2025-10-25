@@ -3,11 +3,7 @@ provider "aws" {
 }
 
 resource "aws_acm_certificate" "azongtech_cert" {
-<<<<<<< HEAD
   domain_name       = var.domain_name
-=======
-  domain_name               = var.domain_name
->>>>>>> ce275c4df5b98d267e8e680a6adbb3438788330b
   subject_alternative_names = var.san_domains
   validation_method         = "DNS"
   tags                      = var.tags
